@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Welcome to my Slideshow App.
+
+Step 1 is to make sure you have the files and folder:
+  index.html // This page
+  style.css // custom CSS
+  bootstrap.css // only if you want to host the bootstrap
+  script.js // main script
+  PicturesJSON.js // A JSON Object in an easy to use js file
+  pictureIndexGenerator.py // generates the JSON Object
+  SlideShowPictures // folder to store pictures
+
+Step 2 :
+  put your images into the SlideShowPictures folder
+  check that the python file has the correct file locations
+  and run the python file to generate/overwrite PicturesJSON.js
+
+Step 3:
+  open the index.html page in the browser
+-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="PicturesJSON.js" charset="utf-8"></script>
+    <script src="script.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title> Slideshow Project</title>
+  </head>
+  <body class="jumbotron alert-primary">
+    <header>
+      <h1 class="display-3"> My Slideshow </h1>
+      <h2 id="notFound" class="text-danger">No Images Were Found</h2>
+    </header>
+    <hr class="my-4">
+    <main>
+      <div class="slideshowbox">
+        <button type="button" class="btn btn-primary" name="back" onclick="changeImage('back')"> Back </button>
+        <div id="imagebox">
+        </div>
+        <button type="button" class="btn btn-primary" name="forward" onclick="changeImage('next')"> Next</button>
+      </div>
+
+      <hr class="my-4">
+
+      <div id="paginationDiv" class="">
+        <ul class="pagination" id="pagination">
+        </ul>
+      </div>
+    </main>
+
+    <footer>
+      <code>
+        Keyboard shortcuts available: <br>
+        Right for next. <br>
+        Left for back. <br>
+      </code>
+    </footer>
+  </body>
+</html>
+
+<script type="text/javascript">
+  init()
+</script>
