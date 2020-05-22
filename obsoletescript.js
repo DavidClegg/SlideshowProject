@@ -39,8 +39,7 @@ function generatePages(pages){
       let pageButton = document.createElement("a");
       pageButton.className = "page-link";
       pageButton.innerHTML = page + 1;
-      //pageButton.setAttribute("onclick",`showHide(${page})`);
-      pageButton.setAttribute("onclick", `selectPage(${page})`); //#
+      pageButton.setAttribute("onclick",`showHide(${page})`);
       pageWrapper.appendChild(pageButton);
       pageParent.appendChild(pageWrapper);
     }
@@ -116,7 +115,10 @@ function showHide(index){
 }
 
 function changeImage(direction){
-  changePage(direction)
+  if(maxIndex + 1 > 5){
+    changePage(direction)
+    return
+  }
   if (direction == "back" && imageIndex > 0){
     showHide(imageIndex);
     showHide(imageIndex - 1);
@@ -157,67 +159,53 @@ function selectPage(selectPageIndex){
   let selectMaxButton = document.getElementById('maxButton');
 
   activeIndex = selectPageIndex;
-  // Let's try break here BREAK
-  if(pageLinks.length < 6){
-    console.log("BREAKING")
-    console.log("SelectedIndex:",selectPageIndex)
-    console.log("PageLinks:",pageLinks.length)
-    for(let link in pageLinks){
-      console.log("Link:",link)
-      if(link == selectPageIndex){
-        pageLinks[selectPageIndex].className = "page-item active";
-        console.log("Setting Active:", link)
-      } else {pageLinks[link].className = "page-item";}
-    }
-  } else {
-    for(let link in pageLinks){
-      if(link == selectPageIndex+2){
-        pageLinks[selectPageIndex+2].className = "page-item active" ;
-      } else {pageLinks[link].className = "page-item" ;}
-    }
+  for(let link in pageLinks){
+    if(link == selectPageIndex+2){
+      pageLinks[selectPageIndex+2].className = "page-item active" ;
+    } else {pageLinks[link].className = "page-item" ;}
+  }
 
 
-    switch(selectPageIndex){
-      case 0:
-        activePages(0,4);
-        enableDisable(selectMinButton, "disable");
-        enableDisable(selectPreviousButton, "disable");
-        enableDisable(selectNextButton, "enable");
-        enableDisable(selectMaxButton, "enable");
-        break;
-      case 1:
-      case 2:
-        activePages(0,4);
-        enableDisable(selectMinButton, "enable");
-        enableDisable(selectPreviousButton, "enable");
-        enableDisable(selectNextButton, "enable");
-        enableDisable(selectMaxButton, "enable");
-        break;
+  switch(selectPageIndex){
+    case 0:
+      activePages(0,4);
+      enableDisable(selectMinButton, "disable");
+      enableDisable(selectPreviousButton, "disable");
+      enableDisable(selectNextButton, "enable");
+      enableDisable(selectMaxButton, "enable");
+      break;
+    case 1:
+    case 2:
+      activePages(0,4);
+      enableDisable(selectMinButton, "enable");
+      enableDisable(selectPreviousButton, "enable");
+      enableDisable(selectNextButton, "enable");
+      enableDisable(selectMaxButton, "enable");
+      break;
 
-      case pictureList.length - 1: //max
-        activePages(maxIndex - 4, maxIndex);
-        enableDisable(selectMinButton, "enable");
-        enableDisable(selectPreviousButton, "enable");
-        enableDisable(selectNextButton, "disable");
-        enableDisable(selectMaxButton, "disable");
-        break;
-      case pictureList.length - 2:
-      case pictureList.length - 3:
-        activePages(maxIndex - 4, maxIndex);
-        enableDisable(selectMinButton, "enable");
-        enableDisable(selectPreviousButton, "enable");
-        enableDisable(selectNextButton, "enable");
-        enableDisable(selectMaxButton, "enable");
-        break;
+    case pictureList.length - 1: //max
+      activePages(maxIndex - 4, maxIndex);
+      enableDisable(selectMinButton, "enable");
+      enableDisable(selectPreviousButton, "enable");
+      enableDisable(selectNextButton, "disable");
+      enableDisable(selectMaxButton, "disable");
+      break;
+    case pictureList.length - 2:
+    case pictureList.length - 3:
+      activePages(maxIndex - 4, maxIndex);
+      enableDisable(selectMinButton, "enable");
+      enableDisable(selectPreviousButton, "enable");
+      enableDisable(selectNextButton, "enable");
+      enableDisable(selectMaxButton, "enable");
+      break;
 
-      default:
-        activePages(selectPageIndex-2,selectPageIndex+2)
-        enableDisable(selectMinButton, "enable");
-        enableDisable(selectPreviousButton, "enable");
-        enableDisable(selectNextButton, "enable");
-        enableDisable(selectMaxButton, "enable");
-        break;
-      }
+    default:
+      activePages(selectPageIndex-2,selectPageIndex+2)
+      enableDisable(selectMinButton, "enable");
+      enableDisable(selectPreviousButton, "enable");
+      enableDisable(selectNextButton, "enable");
+      enableDisable(selectMaxButton, "enable");
+      break;
     }
 }
 
@@ -245,7 +233,9 @@ function init(){
   imageElements = document.getElementsByTagName('img');
   showHide(0);
   generatePages(pictureList.length);
-  selectPage(0);
+  if(maxIndex > 5){
+    selectPage(0);
+  }
   return
 }
 
