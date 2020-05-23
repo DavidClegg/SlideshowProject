@@ -11,3 +11,9 @@ Steps:
   Edit the pictureIndexGenerator.py script to correct the folders for where this project is hosted.
 
   Run the pictureIndexGenerator.py script.
+
+
+TODO:
+  Add comments to the new script.js
+DONE:
+  Fixed the script for image sets from 1-5 images
