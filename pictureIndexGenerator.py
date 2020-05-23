@@ -7,8 +7,8 @@ to be used by the main script.js to generate the HTML of the web page
 import os
 import json
 
-picturesJS = "SlideshowProject/PicturesJSON.js" # Target file.
-slideShowPictures = "SlideshowProject/SlideShowPictures" # Folder of pictures
+picturesJS = "PicturesJSON.js" # Target file.
+slideShowPictures = "SlideShowPictures" # Folder of pictures
 
 def generateArray(folder):
     '''
