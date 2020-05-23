@@ -9,7 +9,7 @@ dictionary = json.dumps({x:array[x] for x in range(len(array))}) # a faux JSON o
 
 
 file = open(targetFile, "w") # open target file
-file.write("pictures = [" + dictionary + "]") # write object to file
+file.write("picturesObject = [" + dictionary + "]") # write object to file
 file.close # close file
 
 ''' This does everything that the other python script does, but in a quarter of the lines. '''
